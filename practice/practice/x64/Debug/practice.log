@@ -1,0 +1,6 @@
+﻿  MyForm.cpp
+C:\Users\Ricardo\source\repos\practice\practice\MyForm.h(428,21): warning C4101: 'emptyInput': unreferenced local variable
+C:\Users\Ricardo\source\repos\practice\practice\MyForm.h(476,27): warning C4101: 'myException': unreferenced local variable
+C:\Users\Ricardo\source\repos\practice\practice\MyForm.cpp(8,6): warning C4829: Possibly incorrect parameters to function main. Consider 'int main(Platform::Array<Platform::String^>^ argv)'
+  MyForm.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+  practice.vcxproj -> C:\Users\Ricardo\source\repos\practice\x64\Debug\practice.exe
