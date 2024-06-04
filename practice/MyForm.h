@@ -548,6 +548,7 @@ namespace $safeprojectname$ {
 		}
 #pragma endregion
 		double totalHours;
+		bool fileExists = false;
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		try {
 			if (this->nameTB->Text == "")
@@ -629,6 +630,7 @@ private: System::Void exitToolStripMenuItem_Click(System::Object^ sender, System
 	Form::Close();
 }
 private: System::Void newToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	fileExists = false;
 	this->startTimeTB1->Text = "";
 	this->startTimeTB2->Text = "";
 	this->lunchTOTB1->Text = "";
@@ -712,6 +714,7 @@ private: System::Void saveAsToolStripMenuItem_Click(System::Object^ sender, Syst
 		outputObject->WriteLine(this->salaryTB->Text);
 
 		outputObject->Close();
+		fileExists = true;
 	}
 }
 private: System::Void openToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -743,7 +746,55 @@ private: System::Void openToolStripMenuItem_Click(System::Object^ sender, System
 	}
 }
 private: System::Void saveToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-	
+	if (fileExists == true) 
+	{
+		FileStream^ fileName = gcnew FileStream(saveFileDialog1->FileName, FileMode::OpenOrCreate);
+		StreamWriter^ outputObject = gcnew StreamWriter(fileName);
+
+		outputObject->WriteLine(this->nameTB->Text);
+		outputObject->WriteLine(this->wageTB->Text);
+		outputObject->WriteLine(this->startTimeTB1->Text);
+		outputObject->WriteLine(this->startTimeTB2->Text);
+		outputObject->WriteLine(this->lunchTOTB1->Text);
+		outputObject->WriteLine(this->lunchTOTB2->Text);
+		outputObject->WriteLine(this->lunchTITB1->Text);
+		outputObject->WriteLine(this->lunchTITB2->Text);
+		outputObject->WriteLine(this->endTimeTB1->Text);
+		outputObject->WriteLine(this->endTimeTB2->Text);
+		outputObject->WriteLine(this->totalHoursTB->Text);
+		outputObject->WriteLine(this->salaryTB->Text);
+		outputObject->Close();
+	}
+	else if (fileExists == false)
+	{
+		saveFileDialog1->FileName = "";
+		saveFileDialog1->FileName = "Default Name";
+		saveFileDialog1->DefaultExt = ".txt";
+		saveFileDialog1->Filter = "Text Files|*.txt";
+
+		if (saveFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+		{
+			FileStream^ fileName = gcnew FileStream(saveFileDialog1->FileName, FileMode::Create);
+
+			StreamWriter^ outputObject = gcnew StreamWriter(fileName);
+
+			outputObject->WriteLine(this->nameTB->Text);
+			outputObject->WriteLine(this->wageTB->Text);
+			outputObject->WriteLine(this->startTimeTB1->Text);
+			outputObject->WriteLine(this->startTimeTB2->Text);
+			outputObject->WriteLine(this->lunchTOTB1->Text);
+			outputObject->WriteLine(this->lunchTOTB2->Text);
+			outputObject->WriteLine(this->lunchTITB1->Text);
+			outputObject->WriteLine(this->lunchTITB2->Text);
+			outputObject->WriteLine(this->endTimeTB1->Text);
+			outputObject->WriteLine(this->endTimeTB2->Text);
+			outputObject->WriteLine(this->totalHoursTB->Text);
+			outputObject->WriteLine(this->salaryTB->Text);
+
+			outputObject->Close();
+			fileExists = true;
+		}
+	}
 }
 };
 }
